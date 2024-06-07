@@ -83,13 +83,27 @@
         color: #6c757d;
       }
 
-      .delete-btn {
+      .delete-btn,
+      .view-btn {
         background-color: red;
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         margin-left: 10px;
+        margin-top: 5px;
+      }
+
+      .view-btn {
+        background-color: #007bff;
+      }
+
+      .view-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .delete-btn:hover {
+        background-color: #dc3545;
       }
 
       .tag {
@@ -120,6 +134,7 @@
 
       .todo-body {
         margin-top: 10px;
+        display: none;
       }
     </style>
   </head>
@@ -202,9 +217,19 @@
             li.classList.toggle("completed");
           });
 
+          // View description
+          const viewBtn = document.createElement("button");
+          viewBtn.textContent = "View";
+          viewBtn.classList.add("view-btn");
+          viewBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            todoBody.style.display =
+              todoBody.style.display === "none" ? "block" : "none";
+          });
+
           // Delete todo
           const deleteBtn = document.createElement("button");
-          deleteBtn.textContent = "X";
+          deleteBtn.textContent = "Delete";
           deleteBtn.classList.add("delete-btn");
           deleteBtn.addEventListener("click", function (e) {
             e.stopPropagation();
@@ -216,6 +241,7 @@
 
           todoHeader.appendChild(todoTitle);
           todoHeader.appendChild(priorityTag);
+          todoHeader.appendChild(viewBtn);
           todoHeader.appendChild(deleteBtn);
 
           const todoBody = document.createElement("div");
