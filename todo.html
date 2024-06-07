@@ -30,15 +30,16 @@
 
       form {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
       }
 
-      input[type="text"] {
-        flex: 1;
+      input[type="text"],
+      select {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        margin-right: 10px;
+        margin-bottom: 10px;
+        width: 100%;
       }
 
       button {
@@ -84,6 +85,24 @@
         cursor: pointer;
         margin-left: 10px;
       }
+
+      .tag {
+        padding: 5px;
+        border-radius: 4px;
+        color: white;
+      }
+
+      .low {
+        background-color: #17a2b8;
+      }
+
+      .medium {
+        background-color: #ffc107;
+      }
+
+      .high {
+        background-color: #dc3545;
+      }
     </style>
   </head>
   <body>
@@ -96,6 +115,11 @@
           placeholder="Enter a new task"
           required
         />
+        <select id="todo-priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
         <button type="submit">Add Task</button>
       </form>
       <ul id="todo-list"></ul>
@@ -104,6 +128,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         const todoForm = document.getElementById("todo-form");
         const todoInput = document.getElementById("todo-input");
+        const todoPriority = document.getElementById("todo-priority");
         const todoList = document.getElementById("todo-list");
 
         // Load existing todos from local storage
@@ -117,6 +142,7 @@
           e.preventDefault();
           const newTodo = {
             text: todoInput.value,
+            priority: todoPriority.value,
             completed: false,
           };
           todos.push(newTodo);
@@ -132,6 +158,11 @@
           if (todo.completed) {
             li.classList.add("completed");
           }
+
+          // Create priority tag
+          const priorityTag = document.createElement("span");
+          priorityTag.textContent = todo.priority;
+          priorityTag.classList.add("tag", todo.priority);
 
           // Toggle completion
           li.addEventListener("click", function () {
@@ -152,6 +183,7 @@
             li.remove();
           });
 
+          li.appendChild(priorityTag);
           li.appendChild(deleteBtn);
           todoList.appendChild(li);
         }
