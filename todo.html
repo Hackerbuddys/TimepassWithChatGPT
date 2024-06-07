@@ -34,12 +34,17 @@
       }
 
       input[type="text"],
-      select {
+      select,
+      textarea {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
         margin-bottom: 10px;
         width: 100%;
+      }
+
+      textarea {
+        resize: none;
       }
 
       button {
@@ -68,8 +73,9 @@
         border-radius: 4px;
         margin-bottom: 10px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
       }
 
       li.completed {
@@ -90,6 +96,7 @@
         padding: 5px;
         border-radius: 4px;
         color: white;
+        margin-right: 10px;
       }
 
       .low {
@@ -103,6 +110,17 @@
       .high {
         background-color: #dc3545;
       }
+
+      .todo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .todo-body {
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
@@ -115,6 +133,11 @@
           placeholder="Enter a new task"
           required
         />
+        <textarea
+          id="todo-description"
+          rows="3"
+          placeholder="Enter a description"
+        ></textarea>
         <select id="todo-priority">
           <option value="low">Low</option>
           <option value="medium">Medium</option>
@@ -128,6 +151,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         const todoForm = document.getElementById("todo-form");
         const todoInput = document.getElementById("todo-input");
+        const todoDescription = document.getElementById("todo-description");
         const todoPriority = document.getElementById("todo-priority");
         const todoList = document.getElementById("todo-list");
 
@@ -142,6 +166,7 @@
           e.preventDefault();
           const newTodo = {
             text: todoInput.value,
+            description: todoDescription.value,
             priority: todoPriority.value,
             completed: false,
           };
@@ -149,12 +174,18 @@
           localStorage.setItem("todos", JSON.stringify(todos));
           addTodoToDOM(newTodo);
           todoInput.value = "";
+          todoDescription.value = "";
         });
 
         // Add todo to DOM
         function addTodoToDOM(todo) {
           const li = document.createElement("li");
-          li.textContent = todo.text;
+
+          const todoHeader = document.createElement("div");
+          todoHeader.classList.add("todo-header");
+
+          const todoTitle = document.createElement("span");
+          todoTitle.textContent = todo.text;
           if (todo.completed) {
             li.classList.add("completed");
           }
@@ -165,7 +196,7 @@
           priorityTag.classList.add("tag", todo.priority);
 
           // Toggle completion
-          li.addEventListener("click", function () {
+          todoTitle.addEventListener("click", function () {
             todo.completed = !todo.completed;
             localStorage.setItem("todos", JSON.stringify(todos));
             li.classList.toggle("completed");
@@ -183,8 +214,17 @@
             li.remove();
           });
 
-          li.appendChild(priorityTag);
-          li.appendChild(deleteBtn);
+          todoHeader.appendChild(todoTitle);
+          todoHeader.appendChild(priorityTag);
+          todoHeader.appendChild(deleteBtn);
+
+          const todoBody = document.createElement("div");
+          todoBody.classList.add("todo-body");
+          todoBody.textContent = todo.description;
+
+          li.appendChild(todoHeader);
+          li.appendChild(todoBody);
+
           todoList.appendChild(li);
         }
       });
