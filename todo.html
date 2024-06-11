@@ -6,7 +6,7 @@
     <title>To-Do List</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f0f0f0;
         display: flex;
         justify-content: center;
@@ -17,20 +17,23 @@
 
       .container {
         background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
+        padding: 80px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 350px;
         text-align: center;
       }
 
       h1 {
+        color: #333;
         margin-bottom: 20px;
+        font-size: 24px;
       }
 
       form {
         display: flex;
         flex-direction: column;
+        gap: 10px;
       }
 
       input[type="text"],
@@ -38,8 +41,8 @@
       textarea {
         padding: 10px;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 10px;
+        border-radius: 8px;
+        font-size: 14px;
         width: 100%;
       }
 
@@ -52,8 +55,9 @@
         border: none;
         background-color: #28a745;
         color: white;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 16px;
       }
 
       button:hover {
@@ -70,12 +74,14 @@
         background-color: #f8f9fa;
         padding: 10px;
         border: 1px solid #dee2e6;
-        border-radius: 4px;
+        border-radius: 8px;
         margin-bottom: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s ease;
       }
 
       li.completed {
@@ -88,14 +94,15 @@
         background-color: red;
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        margin-left: 10px;
         margin-top: 5px;
+        padding: 5px 10px;
       }
 
       .view-btn {
         background-color: #007bff;
+        margin-left: 5px;
       }
 
       .view-btn:hover {
@@ -108,9 +115,11 @@
 
       .tag {
         padding: 5px;
-        border-radius: 4px;
+        border-radius: 8px;
         color: white;
-        margin-right: 10px;
+        margin-left: 10px;
+        font-size: 12px;
+        font-weight: bold;
       }
 
       .low {
@@ -135,6 +144,10 @@
       .todo-body {
         margin-top: 10px;
         display: none;
+        background-color: #e9ecef;
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
       }
     </style>
   </head>
