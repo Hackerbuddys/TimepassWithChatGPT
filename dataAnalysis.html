@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Data Analysis Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 800px;
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+
+      button {
+        padding: 10px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Data Analysis Dashboard</h1>
+      <div id="controls">
+        <button onclick="filterData()">Filter Age > 28</button>
+        <button onclick="displayNames()">Display Names</button>
+        <button onclick="calculateTotalTransactions()">
+          Total Transactions
+        </button>
+      </div>
+      <table id="data-table">
+        <!-- Data will be displayed here -->
+      </table>
+    </div>
+    <script src="dataAnalysis.js"></script>
+  </body>
+</html>
