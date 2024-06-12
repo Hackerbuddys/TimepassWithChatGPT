@@ -6,12 +6,12 @@ const users = [
 
 function displayData(data) {
   const table = document.getElementById("data-table");
-  // table.innerHTML = `
-  //   <tr>
-  //     <th>ID</th>
-  //     <th>Name</th>
-  //     <th>Age</th>
-  //     <th>Transactions</th>
+  table.innerHTML = `
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Transactions</th>
     </tr>
   `;
   data.forEach((user) => {
